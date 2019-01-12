@@ -33,7 +33,7 @@ public class Main {
 
         String fileOutputPath = options.get("-o");
         if (fileOutputPath == null) {
-            filePath = options.get("--output");
+            fileOutputPath = options.get("--output");
         }
         if (fileOutputPath == null || fileOutputPath.isEmpty()) {
             System.out.println("Укажи имя файла вывода в аргументах");
@@ -57,7 +57,9 @@ public class Main {
         }
     }
 
-    /** Реализация алгоритма https://ru.wikipedia.org/wiki/Алгоритм_Ли
+    /**
+     * Реализация алгоритма https://ru.wikipedia.org/wiki/Алгоритм_Ли
+     *
      * @param mazeStructure матрица лабиринта
      * @return массив направлений прохождения лабиринта или пустой массив, если путь не найден
      */
@@ -102,7 +104,7 @@ public class Main {
         do {
             for (Vector.Direction direction : Vector.Direction.values()) {
                 Vector side = current.getFromDirrection(direction);
-                if (side.isInBounds(weights) && weights[side.x][side.y] > 0 && weights[side.x][side.y] + 1 == begin) {
+                if (side.isInBounds(weights)/* && weights[side.x][side.y] > 0 */ && weights[side.x][side.y] + 1 == begin) {
                     reversedPath.add(direction);
                     begin--;
                     current = side;
@@ -122,7 +124,7 @@ public class Main {
     private static MazePart[][] getMazeParts(String filePath) {
         final MazePart[][] mazeStructure;
         try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
-            List<String> lines = stream.collect(Collectors.toList());
+            List<String> lines = stream.map(String::trim).collect(Collectors.toList());
             int height = lines.size();
             int width = lines.stream().mapToInt(String::length).max().orElse(0);
             mazeStructure = new MazePart[height][width];
