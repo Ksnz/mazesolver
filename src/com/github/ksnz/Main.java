@@ -80,7 +80,7 @@ public class Main {
             front.forEach(vector -> {
                 int currentWeight = weights[vector.x][vector.y];
                 for (Vector.Direction direction : Vector.Direction.values()) {
-                    Vector side = vector.getFromDirrection(direction);
+                    Vector side = vector.getFromDirection(direction);
                     if (side.isInBounds(weights) && weights[side.x][side.y] == 0 && mazeStructure[side.x][side.y] == MazePart.PATH) {
                         weights[side.x][side.y] = currentWeight + 1;
                         if (!side.equals(end)) {
@@ -103,7 +103,7 @@ public class Main {
         List<Vector.Direction> reversedPath = new ArrayList<>(begin);
         do {
             for (Vector.Direction direction : Vector.Direction.values()) {
-                Vector side = current.getFromDirrection(direction);
+                Vector side = current.getFromDirection(direction);
                 if (side.isInBounds(weights)/* && weights[side.x][side.y] > 0 */ && weights[side.x][side.y] + 1 == begin) {
                     reversedPath.add(direction);
                     begin--;

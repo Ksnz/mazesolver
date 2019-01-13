@@ -105,7 +105,7 @@ public class Vector {
         return "Vector[" + x + ", " + y + "]";
     }
 
-    public Vector getFromDirrection(Direction direction) {
+    public Vector getFromDirection(Direction direction) {
         switch (direction) {
             case EAST:
                 return new Vector(x, y + 1);

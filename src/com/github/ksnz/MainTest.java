@@ -19,7 +19,7 @@ public class MainTest {
         Vector vector = new Vector(1, 1);
         maze[vector.x][vector.y] = vector;
         for (Vector.Direction direction : Vector.Direction.values()) {
-            Vector side = vector.getFromDirrection(direction);
+            Vector side = vector.getFromDirection(direction);
             //System.out.println(vector);
             maze[side.x][side.y] = side;
         }
