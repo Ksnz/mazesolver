@@ -2,50 +2,6 @@ package com.github.ksnz;
 
 public class Vector {
 
-    public enum Direction {
-        NORTH("u"),
-        NORTHEAST("ur"),
-        EAST("r"),
-        SOUTHEAST("dr"),
-        SOUTH("d"),
-        SOUTHWEST("dl"),
-        WEST("l"),
-        NORTHWEST("ul");
-
-        private final String label;
-
-        Direction(String u) {
-            this.label = u;
-        }
-
-        Direction getOpposite() {
-            switch (this) {
-                case SOUTHWEST:
-                    return NORTHEAST;
-                case NORTH:
-                    return SOUTH;
-                case EAST:
-                    return WEST;
-                case NORTHEAST:
-                    return SOUTHWEST;
-                case SOUTH:
-                    return NORTH;
-                case WEST:
-                    return EAST;
-                case SOUTHEAST:
-                    return NORTHWEST;
-                case NORTHWEST:
-                    return SOUTHEAST;
-                default:
-                    throw new IllegalArgumentException("Кто-то добавил новый енам");
-            }
-        }
-
-        public String getLabel() {
-            return label;
-        }
-    }
-
     final int x;
 
     final int y;
