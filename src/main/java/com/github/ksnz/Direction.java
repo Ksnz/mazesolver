@@ -22,7 +22,7 @@ public enum Direction {
     SOUTHEAST("dr") {
         @Override
         Direction getOpposite() {
-            return SOUTH;
+            return NORTHWEST;
         }
     },
     SOUTH("d") {

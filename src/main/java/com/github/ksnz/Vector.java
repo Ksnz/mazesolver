@@ -1,6 +1,6 @@
 package com.github.ksnz;
 
-public class Vector {
+public final class Vector {
 
     final int x;
 

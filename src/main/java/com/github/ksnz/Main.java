@@ -44,7 +44,7 @@ public class Main {
 
         final MazePart[][] mazeStructure = getMazeParts(filePath);
 
-        ArrayList<Vector.Direction> normalizedPath = getShortestPath(mazeStructure);
+        ArrayList<Direction> normalizedPath = getShortestPath(mazeStructure);
 
         try (PrintWriter pw = new PrintWriter(Files.newBufferedWriter(
                 Paths.get(fileOutputPath)))) {
@@ -63,7 +63,7 @@ public class Main {
      * @param mazeStructure матрица лабиринта
      * @return массив направлений прохождения лабиринта или пустой массив, если путь не найден
      */
-    private static ArrayList<Vector.Direction> getShortestPath(MazePart[][] mazeStructure) {
+    private static ArrayList<Direction> getShortestPath(MazePart[][] mazeStructure) {
         int height = mazeStructure.length;
         int width = mazeStructure.length > 0 ? mazeStructure[0].length : 0;
 
@@ -79,7 +79,7 @@ public class Main {
             Set<Vector> nextFront = new HashSet<>(8);
             front.forEach(vector -> {
                 int currentWeight = weights[vector.x][vector.y];
-                for (Vector.Direction direction : Vector.Direction.values()) {
+                for (Direction direction : Direction.values()) {
                     Vector side = vector.getFromDirection(direction);
                     if (side.isInBounds(weights) && weights[side.x][side.y] == 0 && mazeStructure[side.x][side.y] == MazePart.PATH) {
                         weights[side.x][side.y] = currentWeight + 1;
@@ -93,16 +93,16 @@ public class Main {
             front.addAll(nextFront);
         } while (!front.isEmpty());
 
-        ArrayList<Vector.Direction> normalizedPath = new ArrayList<>();
+        ArrayList<Direction> normalizedPath = new ArrayList<>();
 
         if (weights[end.x][end.y] == 0) {
             return normalizedPath; //пути нет
         }
         Vector current = end;
         int begin = weights[current.x][current.y];
-        List<Vector.Direction> reversedPath = new ArrayList<>(begin);
+        List<Direction> reversedPath = new ArrayList<>(begin);
         do {
-            for (Vector.Direction direction : Vector.Direction.values()) {
+            for (Direction direction : Direction.values()) {
                 Vector side = current.getFromDirection(direction);
                 if (side.isInBounds(weights)/* && weights[side.x][side.y] > 0 */ && weights[side.x][side.y] + 1 == begin) {
                     reversedPath.add(direction);
